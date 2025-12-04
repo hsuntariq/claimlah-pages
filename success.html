@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Success</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
+    .checkmark-circle { stroke-dasharray: 166; stroke-dashoffset: 166; stroke-width: 4; stroke-miterlimit: 10; stroke: #10B981; fill: none; animation: stroke 0.6s cubic-bezier(0.65,0,0.45,1) forwards; }
+    .checkmark { width: 100px; height: 100px; border-radius: 50%; display: block; stroke-width: 4; stroke: #10B981; stroke-miterlimit: 10; margin: 5% auto; box-shadow: inset 0px 0px 0px #10B981; animation: fill 0.4s ease-in-out 0.4s forwards, scale 0.3s ease-in-out 0.9s both; }
+    .checkmark-check { transform-origin: 50% 50%; stroke-dasharray: 48; stroke-dashoffset: 48; animation: stroke 0.3s cubic-bezier(0.65,0,0.45,1) 0.8s forwards; }
+    .fade-in { opacity:0; animation: fadeIn 1s ease-in forwards; animation-delay:0.5s; }
+    .bounce-in { opacity:0; transform:translateY(20px); animation:bounceIn 0.6s ease-out forwards; animation-delay:0.8s; }
+    .gradient-bg { background: linear-gradient(135deg,#10B981,#34D399); }
+    @keyframes stroke{100%{stroke-dashoffset:0;}} 
+    @keyframes scale{0%,100%{transform:none;}50%{transform:scale3d(1.2,1.2,1);}} 
+    @keyframes fill{100%{box-shadow:inset 0px 0px 0px 40px #10B981;}} 
+    @keyframes fadeIn{to{opacity:1;}} 
+    @keyframes bounceIn{0%{opacity:0;transform:translateY(20px);}60%{opacity:1;transform:translateY(-10px);}100%{opacity:1;transform:translateY(0);}}
+  </style>
+</head>
+<body class="gradient-bg flex items-center justify-center min-h-screen">
+  <div class="bg-white p-10 rounded-2xl shadow-xl text-center max-w-lg w-[90%] mx-auto">
+    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+      <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+      <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+    </svg>
+    <h1 class="text-3xl font-bold text-gray-800 mt-4 fade-in">Payment Successful!</h1>
+    <p class="text-gray-600 mt-3 text-lg bounce-in">Congratulations! Your transaction has been completed.</p>
+    <p class="text-gray-500 mt-2 text-sm">Redirecting to app...</p>
+  </div>
+
+  <script>
+    function launchConfetti(){
+      confetti({particleCount:100, spread:70, origin:{y:0.6}, colors:['#10B981','#34D399','#ffffff']});
+    }
+    window.onload = function(){
+      launchConfetti();
+      setTimeout(launchConfetti,500);
+      setTimeout(()=>{ window.location.href="claimlah://premium/success"; },2000);
+    }
+  </script>
+</body>
+</html>
