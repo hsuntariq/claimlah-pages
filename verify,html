@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verified</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+        h1 {
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .fallback-btn {
+            background-color: #28a745;
+            margin-top: 20px;
+        }
+        .fallback-btn:hover {
+            background-color: #218838;
+        }
+        .note {
+            font-size: 14px;
+            color: #666;
+            margin-top: 40px;
+            max-width: 600px;
+        }
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+    </style>
+    <!-- Confetti library (lightweight, no dependencies) -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+    <canvas id="confetti-canvas"></canvas>
+
+    <div style="position: relative; z-index: 2;">
+        <h1>Email Successfully Verified! 🎉</h1>
+        <p>Thank you for verifying your email address.<br>Your account is now active.</p>
+        
+        <button onclick="openApp()">Open the ClaimLah App</button>
+        
+        
+        
+      
+    </div>
+
+    <script>
+        // Trigger confetti celebration on load
+        function launchConfetti() {
+            const canvas = document.getElementById('confetti-canvas');
+            canvas.confetti = canvas.confetti || confetti.create(canvas, { resize: true, useWorker: true });
+
+            canvas.confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#4CAF50', '#007BFF', '#FFC107', '#FF5722', '#9C27B0']
+            });
+
+            // Additional bursts
+            setTimeout(() => {
+                canvas.confetti({
+                    particleCount: 100,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 }
+                });
+            }, 250);
+
+            setTimeout(() => {
+                canvas.confetti({
+                    particleCount: 100,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 }
+                });
+            }, 500);
+        }
+
+        function openApp() {
+            // Attempt to open the custom scheme
+            window.location.href = "claimlah://verify";
+            
+            // Fallback alert if app doesn't open
+            setTimeout(() => {
+                alert("If the app did not open, please ensure ClaimLah is installed and try again.");
+            }, 1500);
+        }
+
+        function continueInBrowser() {
+            // Replace this with whatever fallback action you want
+            // Examples:
+            // - Redirect to your web app dashboard
+            // window.location.href = "https://yourwebapp.com/dashboard";
+            
+            // - Or just show a message
+            alert("Continuing in browser mode. (Customize this action to redirect to your web app if available.)");
+            
+            // If you have a web version, uncomment and update:
+            // window.location.href = "https://app.claimlah.com/?verified=true";
+        }
+
+        // Launch confetti when page loads
+        window.onload = function() {
+            launchConfetti();
+            // Optional: auto-try opening app after a short delay
+            // setTimeout(openApp, 1000);
+        };
+    </script>
+</body>
+</html>
