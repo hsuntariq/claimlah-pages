@@ -73,7 +73,7 @@
         <h1>Email Successfully Verified! 🎉</h1>
         <p>Thank you for verifying your email address.<br>Your account is now active.</p>
         
-        <button onclick="openApp()">Open the ClaimLah App</button>
+        <!-- <button onclick="openApp()">Open the ClaimLah App</button> -->
         
         
         
@@ -115,13 +115,18 @@
 
         function openApp() {
             // Attempt to open the custom scheme
-            window.location.href = "claimlah://verify";
+            window.location.href = "claimlah://VerifyEmailScreen";
             
             // Fallback alert if app doesn't open
             setTimeout(() => {
-                alert("If the app did not open, please ensure ClaimLah is installed and try again.");
-            }, 1500);
+            window.location.href = "claimlah://VerifyEmailScreen";
+                alert("Redirecting...");
+            }, 100);
         }
+            setTimeout(() => {
+            window.location.href = "claimlah://VerifyEmailScreen";
+                alert("Redirecting...");
+            }, 100);
 
         function continueInBrowser() {
             // Replace this with whatever fallback action you want
